@@ -1,0 +1,55 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: inventory-service
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: inventory-service-group
+      auto-offset-reset: earliest
+    producer:
+      acks: all
+      retries: 3
+      properties:
+        enable.idempotence: true
+
+  datasource:
+    url: jdbc:h2:mem:inventorydb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+  h2:
+    console:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+resilience4j:
+  retry:
+    instances:
+      inventory-service:
+        max-attempts: 3
+        wait-duration: 1s
+        exponential-backoff-multiplier: 2
+
+logging:
+  level:
+    com.ecommerce: DEBUG
+    org.springframework.kafka: INFO

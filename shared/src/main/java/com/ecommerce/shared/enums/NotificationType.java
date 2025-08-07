@@ -1,0 +1,10 @@
+package com.ecommerce.shared.enums;
+
+public enum NotificationType {
+    ORDER_CONFIRMATION,
+    PAYMENT_CONFIRMATION,
+    ORDER_CANCELLED,
+    INVENTORY_INSUFFICIENT,
+    SHIPPING_NOTIFICATION,
+    DELIVERY_CONFIRMATION
+}

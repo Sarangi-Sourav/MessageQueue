@@ -1,0 +1,61 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: payment-service
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: payment-service-group
+      auto-offset-reset: earliest
+    producer:
+      acks: all
+      retries: 3
+      properties:
+        enable.idempotence: true
+
+  datasource:
+    url: jdbc:h2:mem:paymentdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+  h2:
+    console:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      payment-service:
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        sliding-window-size: 10
+  retry:
+    instances:
+      payment-service:
+        max-attempts: 3
+        wait-duration: 1s
+        exponential-backoff-multiplier: 2
+
+logging:
+  level:
+    com.ecommerce: DEBUG
+    org.springframework.kafka: INFO
