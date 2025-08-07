@@ -1,4 +1,4 @@
-# Kafka Spring Integration - E-commerce Order Processing System
+# Kafka Spring Integration - E-commerce Order Processing System using KIRO 
 
 A comprehensive Real-Time E-commerce Order Processing System built with Spring Boot and Apache Kafka, demonstrating advanced event-driven architecture patterns including SAGA choreography, event sourcing, and microservices communication.
 
