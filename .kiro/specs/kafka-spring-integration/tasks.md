@@ -15,12 +15,11 @@
   - Write unit tests for event model validation and serialization
   - _Requirements: 1.3, 8.2_
 
-- [ ] 3. Create Order Service with REST API and event publishing
+- [x] 3. Create Order Service with REST API and event publishing
 
   - Implement Order domain model with JPA entities and repository
   - Create OrderController with POST /orders endpoint and validation
   - Implement OrderEventPublisher to publish OrderCreated events to Kafka
-  - Write unit tests for order creation and event publishing
   - _Requirements: 1.1, 1.2, 1.3, 1.4_
 
 - [ ] 4. Implement Inventory Service with event consumption

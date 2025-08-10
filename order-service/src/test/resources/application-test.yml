@@ -1,17 +1,28 @@
 spring:
-  kafka:
-    bootstrap-servers: localhost:9092
+  main:
+    allow-bean-definition-overriding: true
+
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
     username: sa
     password: password
+
   jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
     show-sql: false
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: order-service-test-group
+    producer:
+      acks: all
 
 logging:
   level:
     com.ecommerce: INFO
     org.springframework.kafka: WARN
+    org.hibernate: WARN
